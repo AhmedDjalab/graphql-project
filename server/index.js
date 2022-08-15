@@ -3,6 +3,7 @@ require("dotenv").config();
 const port = process.env.PORT || 5000;
 const schema = require("./schema/schema");
 const color = require("colors");
+const cors = require("cors");
 const connectDb = require("./config/db");
 var { graphqlHTTP } = require("express-graphql");
 var { buildSchema } = require("graphql");
@@ -22,15 +23,17 @@ var root = {
 };
 
 var app = express();
+app.use(cors());
 connectDb();
+
 app.use(
   "/graphql",
   graphqlHTTP({
     schema: schema,
-    rootValue: root,
+    // rootValue: root,
     graphiql: process.env.NODE_ENV === "development",
   })
 );
 app.listen(port, () =>
-  console.log("Running a GraphQL API server at http://localhost:4000/graphql")
+  console.log("Running a GraphQL API server at http://localhost:5000/graphql")
 );
