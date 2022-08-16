@@ -37,3 +37,6 @@ app.use(
 app.listen(port, () =>
   console.log("Running a GraphQL API server at http://localhost:5000/graphql")
 );
+
+// Export the Express API
+module.exports = app;
